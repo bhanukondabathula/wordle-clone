@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Grid.css";
 
 const Grid = ({ guesses, input }) => {
-  return (
+  return ( 
     <div className="grid-container">
       {Array.from({ length: 6 }).map((_, row) => (
         <div className="grid-row" key={row}>

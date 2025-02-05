@@ -40,12 +40,7 @@
     background-color: #333;
   }
   
-  /* Hint text */
-  .hint-text {
-    font-size: 16px;
-    margin-top: 5px;
-    color: rgb(13, 13, 13);
-  }
+
   .correct-word {
     font-size: 1.8rem;  
     font-weight: bold; 
@@ -81,9 +76,6 @@
       font-size: 20px;
     }
   
-    .hint-text {
-      font-size: 20px;
-    }
     .new-game{
       font-size: 20px;
       padding: 10px;

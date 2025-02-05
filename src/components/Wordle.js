@@ -17,6 +17,7 @@ const Wordle = () => {
   const [usedKeys, setUsedKeys] = useState({});
   const [modalData, setModalData] = useState({ isOpen: false, title: "", text: "", buttonText: "Close" });
 
+
   const handleSubmit = useCallback(() => {
     if (input.length !== 5 || !VALID_WORDS.includes(input)) {
       setModalData({ isOpen: true, title: "❌ Invalid Word!", text: "Try a valid 5-letter word.", buttonText: "OK" });
@@ -49,21 +50,40 @@ const Wordle = () => {
         text: `The word was <span class="correct-word">${targetWord}</span>`,
         buttonText: "Try Again",
       });
+      
       setGameOver(true);
     }
   }, [input, targetWord, guesses.length]);
 
+  const debounce = (func, delay) => {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => func(...args), delay);
+    };
+  };
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleInput = useCallback(
+    debounce((key) => {
+      if (key === "Backspace") setInput((prev) => prev.slice(0, -1));
+      else if (/^[a-z]$/.test(key) && input.length < 5) setInput((prev) => prev + key);
+    }, 100),
+    [input]
+  );
+  
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (gameOver) return;
       if (e.key === "Enter" && input.length === 5) handleSubmit();
-      if (e.key === "Backspace") setInput((prev) => prev.slice(0, -1));
-      if (/^[a-z]$/.test(e.key) && input.length < 5) setInput((prev) => prev + e.key);
+      else handleInput(e.key);
     };
-
+  
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [input, gameOver, handleSubmit]);
+  }, [input, gameOver, handleSubmit, handleInput]);
+  
+  
 
   const handleHint = () => {
     if (!gameOver) {
