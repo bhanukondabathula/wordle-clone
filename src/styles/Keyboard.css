@@ -1,0 +1,76 @@
+/* Keyboard container */
+.keyboard-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+  
+  /* General key styles */
+  .key {
+    padding: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #dfdcdc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+  }
+  
+  /* Default key background */
+  .default-key {
+    background-color: #d1d5db; /* Gray */
+  }
+  
+  /* Used key styles */
+  .green {
+    background-color: hsl(115, 81%, 51%);
+    color: white;
+    border-color: #6aaa64;
+  }
+  
+  .yellow {
+    background-color:  hsl(65, 94%, 53%);
+    color: white;
+    border-color: #c9b458;
+  }
+  
+  .gray {
+    background-color: hsl(180, 1%, 47%);
+    color: white;
+    border-color: #787c7e;
+  }
+  
+  /* Special keys */
+  .backspace-key {
+    background-color: #888;
+    color: white;
+  }
+  
+  .enter-key {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Hover effects */
+  .key:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 756px) {
+    .keyboard-container {
+      grid-template-columns: repeat(12, 1fr);
+    }
+  
+    .key {
+      font-size: 18px;
+      padding: 12px;
+    }
+  }
+  
+
+  

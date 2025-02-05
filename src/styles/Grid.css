@@ -1,0 +1,62 @@
+/* Grid container */
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  
+  /* Grid row */
+  .grid-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  /* Grid cell */
+  .grid-cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    background-color: #eef4f7;
+    color: #000;
+  }
+  
+  /* Feedback Colors */
+  .grid-cell.green {
+    background-color: hsl(115, 81%, 51%);
+    color: white;
+    border-color: #6aaa64;
+  }
+  
+  .grid-cell.yellow {
+    background-color: hsl(65, 94%, 53%);
+    color: white;
+    border-color: #c9b458;
+  }
+  
+  .grid-cell.gray {
+    background-color:  hsl(180, 1%, 47%);
+    color: white;
+    border-color: #787c7e;
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 756px) {
+    .grid-cell {
+      width: 50px;
+      height: 50px;
+      font-size: 22px;
+    }
+  }
+  
+
+  

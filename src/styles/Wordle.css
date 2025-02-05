@@ -1,0 +1,92 @@
+/* Wordle container */
+.wordle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  
+  /* Message */
+  .message {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  /* Hint button */
+  .hint-button {
+    background-color: #555;
+    color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .hint-button:hover {
+    background-color: #333;
+  }
+  
+  /* Hint text */
+  .hint-text {
+    font-size: 16px;
+    margin-top: 5px;
+    color: oldlace;
+  }
+  .correct-word {
+    font-size: 1.8rem;  
+    font-weight: bold; 
+    color: #46c44c;  
+    text-transform: uppercase; 
+  }
+  .new-game{
+    background-color: rgb(202, 253, 253);
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid rgb(196, 246, 241);
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 756px) {
+    .wordle-container {
+      padding: 20px;
+      max-width: 400px;
+    }
+  
+    .title {
+      font-size: 24px;
+    }
+  
+    .message {
+      font-size: 18px;
+    }
+  
+    .hint-button {
+      padding: 10px;
+      font-size: 20px;
+    }
+  
+    .hint-text {
+      font-size: 20px;
+    }
+    .new-game{
+      font-size: 20px;
+      padding: 10px;
+    }
+  }
+  

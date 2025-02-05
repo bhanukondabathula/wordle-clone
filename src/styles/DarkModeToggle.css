@@ -1,0 +1,45 @@
+/* Dark mode styles */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Light mode styles */
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Button styling */
+  .dark-mode-toggle {
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Button hover effect */
+  .dark-mode-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dark mode button styles */
+  .dark-mode .dark-mode-toggle {
+    border-color: #ffffff;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Responsive styles */
+  @media (min-width: 756px) {
+    .dark-mode-toggle {
+      font-size: 20px;
+      padding: 12px 14px;
+    }
+  }
+  
