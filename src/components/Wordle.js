@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Grid from "./Grid";
 import Keyboard from "./Keyboard";
 import DarkModeToggle from "./DarkModeToggle";
+import GameModal from "./GameModal";
 import "../styles/Wordle.css";
 
 const VALID_WORDS = ["apple", "grape", "table", "chair", "spoon", "cloud", "house", "bread", "light", "sound"];
@@ -12,15 +13,13 @@ const Wordle = () => {
   const [targetWord, setTargetWord] = useState(getRandomWord);
   const [guesses, setGuesses] = useState([]);
   const [input, setInput] = useState("");
-  const [message, setMessage] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [usedKeys, setUsedKeys] = useState({});
-  const [hint, setHint] = useState("");
+  const [modalData, setModalData] = useState({ isOpen: false, title: "", text: "", buttonText: "Close" });
 
-  // Memoize handleSubmit to avoid unnecessary re-renders
   const handleSubmit = useCallback(() => {
     if (input.length !== 5 || !VALID_WORDS.includes(input)) {
-      setMessage("❌ Invalid word!");
+      setModalData({ isOpen: true, title: "❌ Invalid Word!", text: "Try a valid 5-letter word.", buttonText: "OK" });
       return;
     }
 
@@ -41,13 +40,15 @@ const Wordle = () => {
     setInput("");
 
     if (input === targetWord) {
-      setMessage("🎉 You Win!");
+      setModalData({ isOpen: true, title: "🎉 You Win!", text: "Congratulations! You guessed the word.", buttonText: "Play Again" });
       setGameOver(true);
     } else if (guesses.length === 5) {
-      setMessage(
-        `❌ Game Over! The word was <span class="correct-word">${targetWord}</span>`
-      );
-
+      setModalData({
+        isOpen: true,
+        title: "❌ Game Over!",
+        text: `The word was <span class="correct-word">${targetWord}</span>`,
+        buttonText: "Try Again",
+      });
       setGameOver(true);
     }
   }, [input, targetWord, guesses.length]);
@@ -64,40 +65,24 @@ const Wordle = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [input, gameOver, handleSubmit]);
 
-  // Disable ESLint warning since checkGuess might be used later
-  // eslint-disable-next-line no-unused-vars
-  const checkGuess = (guess) => {
-    let updatedKeys = { ...usedKeys };
-    return guess.split("").map((char, index) => {
-      if (char === targetWord[index]) {
-        updatedKeys[char] = "green";
-        return "green";
-      }
-      if (targetWord.includes(char)) {
-        updatedKeys[char] = "yellow";
-        return "yellow";
-      }
-      updatedKeys[char] = "gray";
-      return "gray";
-    });
-  };
-
   const handleHint = () => {
-    if (!gameOver && targetWord) {
-      setHint(`Hint: The first letter is "${targetWord[0]}"`);
+    if (!gameOver) {
+      setModalData({
+        isOpen: true,
+        title: "💡 Need a Hint?",
+        text: `Hint: The first letter is "<strong>${targetWord[0]}</strong>"`,
+        buttonText: "Got It!",
+      });
     }
   };
 
-  // Disable ESLint warning since handleNewGame is used in JSX
-  // eslint-disable-next-line no-unused-vars
   const handleNewGame = () => {
     setTargetWord(getRandomWord());
     setGuesses([]);
     setInput("");
-    setMessage("");
     setGameOver(false);
     setUsedKeys({});
-    setHint("");
+    setModalData({ isOpen: false, title: "", text: "", buttonText: "Close" });
   };
 
   return (
@@ -106,12 +91,12 @@ const Wordle = () => {
       <DarkModeToggle />
       <Grid guesses={guesses} input={input} />
       <Keyboard input={input} setInput={setInput} handleSubmit={handleSubmit} usedKeys={usedKeys} />
-      <p className="message">{message}</p>
-      <button onClick={handleHint} className="hint-button">
-        Get Hint
-      </button>
-      {hint && <p className="hint-text">{hint}</p>}
+      
+      <button onClick={handleHint} className="hint-button">Get Hint</button>
       <button onClick={handleNewGame} className="new-game">🔄 New Game</button>
+
+      {/* Modal for Hints, Game Over, and Invalid Words */}
+      <GameModal isOpen={modalData.isOpen} message={modalData} onClose={handleNewGame} />
     </div>
   );
 };

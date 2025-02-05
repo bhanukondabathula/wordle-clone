@@ -63,7 +63,7 @@
   /* Responsive Design */
   @media (min-width: 756px) {
     .keyboard-container {
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: repeat(10, 1fr);
     }
   
     .key {
